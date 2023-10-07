@@ -1,0 +1,79 @@
+﻿@page
+@model ShoeStore.Pages.Admin.Shoe.UpdateModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h2>Create product</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>@Model.errorMessage</strong>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+}
+
+<form method="post">
+	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Name</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="name" value="@Model.shoeEntity.Name">
+		</div>
+	</div>
+	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Quantity</label>
+		<div class="col-sm-6">
+			<input type="number" class="form-control" name="quantity" value="@Model.shoeEntity.Quantity">
+		</div>
+	</div>
+	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Thumbnail</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="thumbnail" value="@Model.shoeEntity.Thumbnail">
+		</div>
+	</div>
+	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Color</label>
+		<div class="col-sm-6">
+			<select name="color" class="form-control">
+				@foreach (var item in Model.colorList)
+				{
+					<option value="@item.Id">@item.Name</option>
+				}
+			</select>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Color</label>
+		<div class="col-sm-6">
+			<select name="color" class="form-control">
+				@foreach (var item in Model.categoryList)
+				{
+					<option value="@item.Id">@item.Name</option>
+				}
+			</select>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Size</label>
+		<div class="col-sm-6">
+			<select name="size" class="form-control">
+				@foreach (var item in Model.sizeList)
+				{
+					<option value="@item.Id">@item.Name</option>
+				}
+			</select>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-sm-3 d-grid">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+		<div class="col-sm-3 d-grid">
+			<a class="btn btn-outline-primary" href="/admin/shoe" role="button">Cancel</a> 
+		</div>
+	</div>
+</form>

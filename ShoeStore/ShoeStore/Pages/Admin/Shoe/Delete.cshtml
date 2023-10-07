@@ -1,0 +1,25 @@
+﻿@page
+@using System.Data.SqlClient;
+@{
+	try
+	{
+		string id = Request.Query["id"];
+		string connectionString = "Data Source=DESKTOP-2V6GLV0;Initial Catalog=ShoeStore;Integrated Security=True";
+		using (SqlConnection connection = new SqlConnection(connectionString))
+		{
+			connection.Open();
+			string sql = "DELETE from shoes WHERE id=@id";
+			using (SqlCommand command = new SqlCommand(sql, connection))
+			{
+				command.Parameters.AddWithValue("@id", id);
+				command.ExecuteNonQuery();
+			}
+		}
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine(ex.ToString());
+		throw;
+	}
+	Response.Redirect("/admin/shoe");
+}

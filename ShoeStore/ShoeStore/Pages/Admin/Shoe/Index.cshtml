@@ -1,0 +1,40 @@
+﻿@page
+@model ShoeStore.Pages.Admin.Shoe.IndexModel
+@{
+	Layout = null;
+	ViewData["Title"] = "Shoe list";
+}
+
+<br />
+<h2> Shoe list</h2>
+<div style="margin-bottom:50px">
+	<a style="color:white;padding:4px 4px;text-decoration:none;background-color: green; border-radius: 4px" href="/Admin/Shoe/Create">Create shoe</a>
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Thumbnail</th>
+			<th>Name</th>
+			<th>Quantity</th>
+			<th>Color</th>
+			<th>Size</th>
+		</tr>
+	</thead>
+	@foreach (var item in Model.shoeList)
+	{
+		<tr>
+			<td style="padding:12px 15px;">@item.Id</td>
+			<td style="padding:12px 15px;">@item.Thumbnail</td>
+			<td style="padding:12px 15px;">@item.Name</td>
+			<td style="padding:12px 15px;">@item.Quantity</td>
+			<td style="padding:12px 15px;">@item.Color</td>
+			<td style="padding:12px 15px;">@item.Size</td>
+			<td style="padding:12px 15px;">
+				<a style="padding:4px 4px;text-decoration:none;background-color: aqua; border-radius: 4px" href="/Admin/Shoe/Update?Id=@item.Id">Edit</a>
+				<a style="margin-left:6px;padding:4px 4px;text-decoration:none;background-color: red; border-radius: 4px" href="/Admin/Shoe/Delete?Id=@item.Id">Delete</a>
+			</td>
+
+		</tr>
+	}
+</table>
