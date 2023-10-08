@@ -4,6 +4,7 @@
     Layout = null;
     ViewData["Title"] = "Create";
 }
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
 <br />
 <h2>Create product</h2>
@@ -33,6 +34,12 @@
 		<label class="col-sm3 col-form-label">Thumbnail</label>
 		<div class="col-sm-6">
 			<input type="text" class="form-control" name="thumbnail" value="@Model.shoeEntity.Thumbnail">
+		</div>
+	</div>
+	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Price</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="price" value="@Model.shoeEntity.Price">
 		</div>
 	</div>
 	<div class="row mb-3">
@@ -69,7 +76,7 @@
 		</div>
 	</div>
 	@*button submit và cancel*@
-	<div class="row mb-3">
+	<div class="row mt-3">
 		<div class="col-sm-3 d-grid">
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</div>
@@ -79,3 +86,5 @@
 		</div>
 	</div>
 </form>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

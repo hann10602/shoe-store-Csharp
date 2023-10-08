@@ -2,11 +2,12 @@
 @model ShoeStore.Pages.Admin.Shoe.UpdateModel
 @{
     Layout = null;
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
 }
 
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <br />
-<h2>Create product</h2>
+<h2>Update product</h2>
 
 @if (Model.errorMessage.Length > 0)
 {
@@ -36,6 +37,12 @@
 		</div>
 	</div>
 	<div class="row mb-3">
+		<label class="col-sm3 col-form-label">Price</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="price" value="@Model.shoeEntity.Price">
+		</div>
+	</div>
+	<div class="row mb-3">
 		<label class="col-sm3 col-form-label">Color</label>
 		<div class="col-sm-6">
 			<select name="color" class="form-control">
@@ -47,9 +54,9 @@
 		</div>
 	</div>
 	<div class="row mb-3">
-		<label class="col-sm3 col-form-label">Color</label>
+		<label class="col-sm3 col-form-label">Category</label>
 		<div class="col-sm-6">
-			<select name="color" class="form-control">
+			<select name="category" class="form-control">
 				@foreach (var item in Model.categoryList)
 				{
 					<option value="@item.Id">@item.Name</option>
@@ -76,4 +83,8 @@
 			<a class="btn btn-outline-primary" href="/admin/shoe" role="button">Cancel</a> 
 		</div>
 	</div>
+
+	<input type="hidden" class="form-control" name="id" value="@Model.shoeEntity.Id">
 </form>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

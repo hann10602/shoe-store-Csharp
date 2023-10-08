@@ -84,7 +84,10 @@ namespace ShoeStore.Pages.Admin.Shoe
 								shoeEntity.Quantity = reader.GetInt64(2);
 								shoeEntity.Color = reader.GetInt32(3);
 								shoeEntity.Size = reader.GetInt32(4);
-							}
+								shoeEntity.Thumbnail = reader.GetString(5);
+								shoeEntity.Category = reader.GetInt32(6);
+								shoeEntity.Price = reader.GetInt32(7);
+                            }
 						}
 					}
 				}
@@ -100,16 +103,18 @@ namespace ShoeStore.Pages.Admin.Shoe
 		{
 			try
 			{
+				shoeEntity.Id = int.Parse(Request.Form["id"]);
 				shoeEntity.Name = Request.Form["name"];
 				shoeEntity.Quantity = int.Parse(Request.Form["quantity"]);
 				shoeEntity.Thumbnail = Request.Form["thumbnail"];
-				shoeEntity.Color = int.Parse(Request.Form["color"]);
 				shoeEntity.Category = int.Parse(Request.Form["category"]);
+				shoeEntity.Color = int.Parse(Request.Form["color"]);
 				shoeEntity.Size = int.Parse(Request.Form["size"]);
+				shoeEntity.Price = int.Parse(Request.Form["price"]);
 
 				if (string.IsNullOrEmpty(shoeEntity.Name) || shoeEntity.Quantity == 0
 				|| string.IsNullOrEmpty(shoeEntity.Thumbnail)
-				|| shoeEntity.Size == 0 || shoeEntity.Color == 0 || shoeEntity.Category == 0)
+				|| shoeEntity.Size == 0 || shoeEntity.Color == 0)
 				{
 					errorMessage = "All fields are required!!!";
 					return;
@@ -120,19 +125,16 @@ namespace ShoeStore.Pages.Admin.Shoe
 				{
 
 					connection.Open();
-					string sql = "INSERT INTO shoes" +
-					"(id, name, quantity, thumbnail, color_id, size_id, category_id) VALUES" +
-					"(@id, @name, @quantity, @thumbnail, @colorId, @sizeId, @categoryId);";
+					string sql = "UPDATE shoes " +
+                    "SET name = @name, quantity = @quantity, thumbnail =  @thumbnail, color_id = @colorId, price = @price, size_id = @sizeId, category_id = @categoryId WHERE id = @id";
 					using (SqlCommand command = new SqlCommand(sql, connection))
 					{
-						Guid originalGuid = Guid.NewGuid();
-						byte[] bytes = originalGuid.ToByteArray();
-						int id = BitConverter.ToInt32(bytes, 0);
-						command.Parameters.AddWithValue("@id", id);
+						command.Parameters.AddWithValue("@id", shoeEntity.Id);
 						command.Parameters.AddWithValue("@name", shoeEntity.Name);
 						command.Parameters.AddWithValue("@quantity", shoeEntity.Quantity);
 						command.Parameters.AddWithValue("@thumbnail", shoeEntity.Thumbnail);
-						command.Parameters.AddWithValue("@categoryId", shoeEntity.Category);
+                        command.Parameters.AddWithValue("@price", shoeEntity.Price);
+                        command.Parameters.AddWithValue("@categoryId", shoeEntity.Category);
 						command.Parameters.AddWithValue("@colorId", shoeEntity.Color);
 						command.Parameters.AddWithValue("@sizeId", shoeEntity.Size);
 						command.ExecuteNonQuery();

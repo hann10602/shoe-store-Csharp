@@ -77,7 +77,8 @@ namespace ShoeStore.Pages
 									}
 								}
 								shoeDTO.Thumbnail = reader.GetString(5);
-								shoeList.Add(shoeDTO);
+                                shoeDTO.Price = reader.GetInt32(7);
+                                shoeList.Add(shoeDTO);
 							}
 						}
 					}
@@ -96,6 +97,7 @@ namespace ShoeStore.Pages
         public int Id { get; set; }
         public string Name { get; set; }
         public long Quantity { get; set; }
+        public int Price { get; set; }
         public string Thumbnail { get; set; }
         public int Category { get; set; }
         public int Color { get; set; }
@@ -107,6 +109,7 @@ namespace ShoeStore.Pages
         public int Id { get; set; }
         public string Name { get; set; }
         public long Quantity { get; set; }
+        public int Price { get; set; }
 
         public string Thumbnail { get; set; }
         public string Category { get; set; }
@@ -115,15 +118,21 @@ namespace ShoeStore.Pages
     }
     public class UserEntity
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public string Created_at { get; set; }
+        public int Id { get; set; }
+        public string Fullname { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public int RoleId { get; set; }
 
     }
-	public class ColorEntity
+    public class BillEntity
+    {
+        public int Id { get; set; }
+        public int ShoeId { get; set; }
+        public int Status { get; set; }
+
+    }
+    public class ColorEntity
 	{
 		public int Id { get; set; }
 		public string Code { get; set; }

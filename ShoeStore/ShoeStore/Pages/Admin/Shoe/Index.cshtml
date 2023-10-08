@@ -5,6 +5,8 @@
 	ViewData["Title"] = "Shoe list";
 }
 
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
 <br />
 <h2> Shoe list</h2>
 <div style="margin-bottom:50px">
@@ -16,8 +18,10 @@
 			<th>ID</th>
 			<th>Thumbnail</th>
 			<th>Name</th>
+			<th>Price</th>
 			<th>Quantity</th>
 			<th>Color</th>
+			<th>Category</th>
 			<th>Size</th>
 		</tr>
 	</thead>
@@ -27,8 +31,10 @@
 			<td style="padding:12px 15px;">@item.Id</td>
 			<td style="padding:12px 15px;">@item.Thumbnail</td>
 			<td style="padding:12px 15px;">@item.Name</td>
+			<td style="padding:12px 15px;">@item.Price đ</td>
 			<td style="padding:12px 15px;">@item.Quantity</td>
 			<td style="padding:12px 15px;">@item.Color</td>
+			<td style="padding:12px 15px;">@item.Category</td>
 			<td style="padding:12px 15px;">@item.Size</td>
 			<td style="padding:12px 15px;">
 				<a style="padding:4px 4px;text-decoration:none;background-color: aqua; border-radius: 4px" href="/Admin/Shoe/Update?Id=@item.Id">Edit</a>
@@ -38,3 +44,6 @@
 		</tr>
 	}
 </table>
+
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -91,56 +91,7 @@ namespace ShoeStore.Pages.Home
                                     }
                                 }
                                 shoeDTO.Thumbnail = reader.GetString(5);
-                                shoeList.Add(shoeDTO);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw;
-            }
-        }
-
-        public void OnPost()
-        {
-            string search = Request.Form["search"];
-            try
-            {
-                string connectionString = "Data Source=DESKTOP-2V6GLV0;Initial Catalog=ShoeStore;Integrated Security=True";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string sql = "SELECT * FROM shoes WHERE name like '%" + search + "%'";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                ShoeDTO shoeDTO = new ShoeDTO();
-                                shoeDTO.Id = reader.GetInt32(0);
-                                shoeDTO.Name = reader.GetString(1);
-                                shoeDTO.Quantity = reader.GetInt64(2);
-                                foreach (ColorEntity colorEntity in colorList)
-                                {
-                                    int colorId = reader.GetInt32(3);
-                                    if (colorEntity.Id == colorId)
-                                    {
-                                        shoeDTO.Color = colorEntity.Name;
-                                    }
-                                }
-                                foreach (SizeEntity sizeEntity in sizeList)
-                                {
-                                    int sizeId = reader.GetInt32(4);
-                                    if (sizeEntity.Id == sizeId)
-                                    {
-                                        shoeDTO.Size = sizeEntity.Name;
-                                    }
-                                }
-                                shoeDTO.Thumbnail = reader.GetString(5);
+                                shoeDTO.Price = reader.GetInt32(6);
                                 shoeList.Add(shoeDTO);
                             }
                         }

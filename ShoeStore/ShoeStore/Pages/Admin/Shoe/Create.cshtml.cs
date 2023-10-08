@@ -88,6 +88,7 @@ namespace ShoeStore.Pages.Admin.Shoe
                 shoeEntity.Category = int.Parse(Request.Form["category"]);
                 shoeEntity.Color = int.Parse(Request.Form["color"]);
 				shoeEntity.Size = int.Parse(Request.Form["size"]);
+				shoeEntity.Price = int.Parse(Request.Form["price"]);
 
 				if (string.IsNullOrEmpty(shoeEntity.Name) || shoeEntity.Quantity == 0
 				|| string.IsNullOrEmpty(shoeEntity.Thumbnail)
@@ -103,8 +104,8 @@ namespace ShoeStore.Pages.Admin.Shoe
 
 					connection.Open();
 					string sql = "INSERT INTO shoes" +
-                    "(id, name, quantity, thumbnail, color_id, size_id, category_id) VALUES" +
-                    "(@id, @name, @quantity, @thumbnail, @colorId, @sizeId, @categoryId);";
+                    "(id, name, quantity, thumbnail, color_id, size_id, category_id, price) VALUES" +
+					"(@id, @name, @quantity, @thumbnail, @colorId, @sizeId, @categoryId, @price);";
 					using (SqlCommand command = new SqlCommand(sql, connection))
 					{
 						Guid originalGuid = Guid.NewGuid();
@@ -117,6 +118,7 @@ namespace ShoeStore.Pages.Admin.Shoe
                         command.Parameters.AddWithValue("@categoryId", shoeEntity.Category);
                         command.Parameters.AddWithValue("@colorId", shoeEntity.Color);
 						command.Parameters.AddWithValue("@sizeId", shoeEntity.Size);
+						command.Parameters.AddWithValue("@price", shoeEntity.Price);
 						command.ExecuteNonQuery();
 					}
 				}
